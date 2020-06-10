@@ -1,0 +1,54 @@
+<div class="container content">
+  <hr class="mb-5">
+  <div class="row">
+    <div class="col-md-6 container">
+      <div class="card shadow py-5">
+        <div class="container">
+          <form #formulario class="ml-3"  (ngSubmit)="formulario.reset()" >
+            <div class="form-group">
+              <input type="number" #id id="id" hidden value=-1>
+              <label for="Nombre">Nombre</label>
+              <input type="text" placeholder="Nombre" class="form-control" id="Nombre" #Nombre>
+            </div>
+            <div class="form-group">
+              <label for="Cargo">Cargo</label>
+              <input type="text" placeholder="Cargo" class="form-control" id="Cargo" #Cargo>
+            </div>
+            <div class="formgroup">
+              <label for="Salario">Salario</label>
+              <input type="text" placeholder="Salario" class="form-control" id="Salario" #Salario>
+            </div>
+            <button type="submit" (click)="guardar(Nombre.value, Cargo.value, Salario.value,formulario)"
+              class="btn btn-primary mb-2 mt-2 float-right" data-toggle="button">
+              Guardar
+            </button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6  container">
+      <table class="table table-borderless shadow">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Cargo</th>
+            <th>Salario</th>  
+            <th>Edit</th>
+            <th>Drop</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of Empleados; let indice=index">
+            
+            <td>{{employee.Nombre}}</td>
+            <td>{{employee.Cargo}}</td>
+            <td>{{employee.Salario}}</td>
+            <td><i (click)="edit(indice,formulario)" class="fas fa-pencil-alt"></i></td>
+            <td><i (click)="drop(indice,formulario)" class="fas fa-trash-alt"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
