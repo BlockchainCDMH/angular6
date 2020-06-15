@@ -4,7 +4,7 @@
     <div class="col-md-6 container">
       <div class="card shadow py-5">
         <div class="container">
-          <form #formulario class="ml-3"  (ngSubmit)="formulario.reset()" >
+          <form #formulario class="ml-3" (ngSubmit)="formulario.reset()">
             <div class="form-group">
               <input type="number" #id id="id" hidden value=-1>
               <label for="Nombre">Nombre</label>
@@ -16,7 +16,7 @@
             </div>
             <div class="formgroup">
               <label for="Salario">Salario</label>
-              <input type="text" placeholder="Salario" class="form-control" id="Salario" #Salario>
+              <input type="number" placeholder="Salario" class="form-control" id="Salario" #Salario>
             </div>
             <button type="submit" (click)="guardar(Nombre.value, Cargo.value, Salario.value,formulario)"
               class="btn btn-primary mb-2 mt-2 float-right" data-toggle="button">
@@ -33,22 +33,36 @@
           <tr>
             <th>Nombre</th>
             <th>Cargo</th>
-            <th>Salario</th>  
+            <th>Salario</th>
             <th>Edit</th>
             <th>Drop</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="t_body">
           <tr *ngFor="let employee of Empleados; let indice=index">
-            
-            <td>{{employee.Nombre}}</td>
-            <td>{{employee.Cargo}}</td>
-            <td>{{employee.Salario}}</td>
-            <td><i (click)="edit(indice,formulario)" class="fas fa-pencil-alt"></i></td>
-            <td><i (click)="drop(indice,formulario)" class="fas fa-trash-alt"></i></td>
+            <div *ngIf="employee.Salario <= compareto; then optionone else optiontwo">
+            </div>
+            <ng-template #optionone>
+              <td class="fondo">{{employee.Nombre}}</td>
+              <td class="fondo">{{employee.Cargo}}</td>
+              <td class="fondo">{{employee.Salario}}</td>
+              <td class="fondo"><i (click)="edit(indice,formulario)" class="fas fa-pencil-alt"></i></td>
+              <td class="fondo"><i (click)="drop(indice,formulario)" class="fas fa-trash-alt"></i></td>
+            </ng-template>
+            <ng-template #optiontwo>
+              <td>{{employee.Nombre}}</td>
+              <td>{{employee.Cargo}}</td>
+              <td>{{employee.Salario}}</td>
+              <td><i (click)="edit(indice,formulario)" class="fas fa-pencil-alt"></i></td>
+              <td><i (click)="drop(indice,formulario)" class="fas fa-trash-alt"></i></td>
+            </ng-template>
           </tr>
         </tbody>
       </table>
+      <div class="mt-2">
+        <span ngNonBindable>{{Resaltar}} el numero de empleados</span> con sueldos menores a:
+        <input type="number" name="number" id="filter" #filter (keyup)="refresh(filter.value)" value=0>
+      </div>
     </div>
   </div>
 </div>

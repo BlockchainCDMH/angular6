@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, HostBinding } from '@angular/core';
-import { Destinoviaje } from '../models/Destinoviaje.models';
+import { Component, OnInit, Input, HostBinding, EventEmitter, Output } from '@angular/core';
+import { Destinoviaje } from '../models/destino-viaje.model';
+
 
 @Component({
   selector: 'app-country',
@@ -7,11 +8,19 @@ import { Destinoviaje } from '../models/Destinoviaje.models';
   styleUrls: ['./country.component.css']
 })
 export class CountryComponent implements OnInit {
-@Input() country :Destinoviaje;
-@HostBinding('attr.class') cssClass='col-md-4';
-  constructor() { }
+  @Input() country: Destinoviaje;
+  @Input() indice: number;
+  @HostBinding('attr.class') cssClass = 'col-md-4';
+  @Output() clicked:EventEmitter<Destinoviaje>;
+  constructor() {
+    this.clicked = new EventEmitter();
+   }
 
   ngOnInit(): void {
   }
-
+  
+  ir():Boolean { 
+    this.clicked.emit(this.country);
+    return false;
+  }
 }

@@ -1,13 +1,25 @@
  <div class="card-content">
      <div class="card-img">
-         <img src="https://placeimg.com/380/230/{{country.imageurl}}" alt="">
-         <span><h4>{{country.nombre}}</h4></span>
+         <img src="https://placeimg.com/380/230/nature" alt="">
+         <span><h4>{{indice}}</h4></span>
      </div>
      <div class="card-desc">
          <h3>{{country.nombre}}</h3>
-         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, voluptatum! Dolor 
-quo, perspiciatis
-             voluptas totam</p>
-             <a href="#" class="btn-card">Read</a>   
+         <p>Servicios</p>
+         <ul>
+             <li *ngFor='let s of country.servicios'>
+                 <span [ngSwitch]="s">
+                     <i *ngSwitchCase="'Desayuno'">{{s}}</i>
+                     <i *ngSwitchDefault></i>
+                 </span>
+             </li>
+         </ul>
+         <div class="row">
+             <div class="col-md 6">
+                <a href="#" class="btn-card" (click)="ir()">Ir!</a>
+                <span *ngIf="country.GetState()">-PREFERIDO-</span></div>
+             <div class="col-md 6"><p class="text-center"><a [routerLink]="['/Destino']">Ver Detalle</a></p></div>
+         </div>
+               
      </div>
  </div>

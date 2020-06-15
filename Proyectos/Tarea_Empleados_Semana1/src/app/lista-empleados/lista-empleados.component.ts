@@ -8,13 +8,18 @@ import { empleados } from '../models/empleado.models';
 export class ListaEmpleadosComponent implements OnInit {
   Empleados: empleados[];
   Empleado: empleados;
+  compareto:number;
   constructor() {
-    this.Empleados = [new empleados("albus dumbledore", "Director", "Desconocido")];
+    this.compareto=0;
+    this.Empleados = [new empleados("albus dumbledore", "Director", 5000000)];
   }
 
   ngOnInit(): void {
   }
-  guardar(nombre: String, Cargo: String, Salario: String, formulario): Boolean {
+  refresh(input){
+    this.compareto=parseInt(input);
+  }
+  guardar(nombre: String, Cargo: String, Salario: number, formulario): Boolean {
     if (parseInt(formulario.id.value) == -1) {
       this.Empleados.push(new empleados(nombre, Cargo, Salario));
       formulario.reset();
